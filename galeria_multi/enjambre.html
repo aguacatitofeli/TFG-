@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Galería de enjambre · TFG</title>
+<style>
+  :root{
+    --bg:#0e1116;--panel:#161b22;--line:#2a3340;
+    --ink:#e6edf3;--ink-dim:#8b949e;
+    --ref:#58a6ff;--ok:#3fb950;--mid:#d29922;--no:#f85149;
+    --mono:'SFMono-Regular',ui-monospace,'Cascadia Code','Menlo',monospace;
+    --sans:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1.6;padding:0 0 80px}
+  .back{
+    max-width:1200px;margin:0 auto;padding:24px 32px 0;
+    font-family:var(--mono);font-size:13px;
+  }
+  .back a{color:var(--ink-dim);text-decoration:none}
+  .back a:hover{color:var(--ref)}
+  header{border-bottom:1px solid var(--line);padding:20px 32px 36px;max-width:1200px;margin:0 auto}
+  .eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:2.5px;text-transform:uppercase;color:var(--ink-dim);margin-bottom:14px}
+  header h1{font-size:30px;font-weight:600;letter-spacing:-0.5px;margin-bottom:12px}
+  header p{color:var(--ink-dim);max-width:680px;font-size:15px}
+  .legend{display:flex;gap:22px;flex-wrap:wrap;margin-top:24px;font-family:var(--mono);font-size:12px}
+  .legend span{display:flex;align-items:center;gap:7px;color:var(--ink-dim)}
+  .dot{width:9px;height:9px;border-radius:2px;display:inline-block}
+  main{max-width:1200px;margin:0 auto;padding:0 32px}
+  .reference{margin:40px 0;border:1px solid var(--ref);border-radius:12px;background:linear-gradient(180deg,rgba(88,166,255,0.06),transparent);padding:24px;display:grid;grid-template-columns:340px 1fr;gap:28px;align-items:center}
+  .reference .thumb{cursor:zoom-in}
+  .reference img{width:100%;border-radius:8px;display:block;background:#fff;border:1px solid var(--line)}
+  .reference .meta .tag{font-family:var(--mono);font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--ref);border:1px solid var(--ref);border-radius:4px;padding:3px 9px;display:inline-block;margin-bottom:12px}
+  .reference .meta h2{font-size:22px;font-weight:600;margin-bottom:10px}
+  .reference .meta p{color:var(--ink-dim);font-size:14px}
+  .group{margin:44px 0 12px}
+  .group-head{display:flex;align-items:center;gap:12px;margin-bottom:6px}
+  .group-head .gdot{width:11px;height:11px;border-radius:3px}
+  .group-head h3{font-size:16px;font-weight:600}
+  .group-head .count{font-family:var(--mono);font-size:12px;color:var(--ink-dim);margin-left:auto}
+  .group-rule{height:1px;background:var(--line);margin-bottom:22px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:18px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:10px;overflow:hidden;cursor:zoom-in;transition:border-color .15s,transform .15s}
+  .card:hover{border-color:var(--ink-dim);transform:translateY(-2px)}
+  .card .imgwrap{background:#fff;line-height:0}
+  .card img{width:100%;display:block}
+  .card .label{padding:10px 14px;font-family:var(--mono);font-size:13px;display:flex;align-items:center;justify-content:space-between}
+  .card .label .code{color:var(--ink)}
+  .card .label .badge{width:8px;height:8px;border-radius:2px}
+  .lightbox{position:fixed;inset:0;background:rgba(5,7,10,0.94);display:none;align-items:center;justify-content:center;z-index:100;padding:40px;cursor:zoom-out}
+  .lightbox.open{display:flex}
+  .lightbox figure{max-width:1100px;width:100%;text-align:center}
+  .lightbox img{max-width:100%;max-height:78vh;border-radius:8px;background:#fff;box-shadow:0 24px 80px rgba(0,0,0,0.6)}
+  .lightbox figcaption{font-family:var(--mono);font-size:14px;color:var(--ink);margin-top:18px}
+  .lightbox .hint{display:block;font-size:12px;color:var(--ink-dim);margin-top:6px}
+  .lightbox .close{position:absolute;top:24px;right:30px;font-size:30px;color:var(--ink-dim);background:none;border:none;cursor:pointer;line-height:1}
+  .lightbox .close:hover{color:var(--ink)}
+  .err{max-width:1200px;margin:60px auto;padding:0 32px;color:var(--no);font-family:var(--mono);font-size:14px}
+  @media(max-width:680px){.reference{grid-template-columns:1fr}header{padding:16px 20px 28px}main{padding:0 20px}}
+</style>
+</head>
+<body>
+
+<div class="back"><a href="index.html">&larr; Volver al catálogo</a></div>
+
+<header>
+  <div class="eyebrow" id="eyebrow">Enjambre</div>
+  <h1 id="titulo">Cargando…</h1>
+  <p id="desc"></p>
+  <div class="legend">
+    <span><i class="dot" style="background:var(--ref)"></i> Referencia</span>
+    <span><i class="dot" style="background:var(--ok)"></i> Seleccionada</span>
+    <span><i class="dot" style="background:var(--mid)"></i> Condicional</span>
+    <span><i class="dot" style="background:var(--no)"></i> Descartada</span>
+  </div>
+</header>
+
+<main>
+  <section class="reference" id="refBox" style="display:none">
+    <div class="thumb" id="refThumb">
+      <img id="refImg" src="" alt="">
+    </div>
+    <div class="meta">
+      <span class="tag">Estación de referencia</span>
+      <h2 id="refCode"></h2>
+      <p id="refDesc"></p>
+    </div>
+  </section>
+  <div id="groups"></div>
+</main>
+
+<div class="err" id="err" style="display:none"></div>
+
+<div class="lightbox" id="lb">
+  <button class="close" id="lbClose" aria-label="Cerrar">&times;</button>
+  <figure><img id="lbImg" src="" alt=""><figcaption id="lbCap"></figcaption></figure>
+</div>
+
+<script>
+  // Lee que enjambre mostrar desde la URL: enjambre.html?e=enjambre1
+  const params = new URLSearchParams(location.search);
+  const carpeta = params.get("e");
+
+  const GRUPOS = [
+    {key:"ok",  titulo:"Óptimas — seleccionadas",      color:"var(--ok)"},
+    {key:"mid", titulo:"Aceptables — uso condicional", color:"var(--mid)"},
+    {key:"no",  titulo:"Deficientes — descartadas",    color:"var(--no)"},
+  ];
+
+  function render(D){
+    const base = "enjambres/" + carpeta + "/sismogramas/";
+    document.getElementById("eyebrow").textContent = D.eyebrow || "Enjambre";
+    document.getElementById("titulo").textContent = D.titulo;
+    document.getElementById("desc").textContent = D.desc || "";
+    document.title = D.titulo + " · TFG";
+
+    // Referencia
+    if(D.referencia){
+      const r = D.referencia;
+      document.getElementById("refBox").style.display = "grid";
+      document.getElementById("refImg").src = base + r.f + ".png";
+      document.getElementById("refImg").alt = "Sismograma de " + r.code;
+      document.getElementById("refCode").textContent = r.code;
+      document.getElementById("refDesc").textContent = r.desc || "";
+      document.getElementById("refThumb").dataset.full = base + r.f + ".png";
+      document.getElementById("refThumb").dataset.code = r.code + " · referencia";
+    }
+
+    // Grupos
+    const cont = document.getElementById("groups");
+    GRUPOS.forEach(gr => {
+      const items = D.estaciones.filter(e => e.g === gr.key);
+      if(!items.length) return;
+      const sec = document.createElement("section");
+      sec.className = "group";
+      sec.innerHTML =
+        '<div class="group-head"><span class="gdot" style="background:'+gr.color+'"></span>'
+        + '<h3>'+gr.titulo+'</h3><span class="count">'+items.length+' estaciones</span></div>'
+        + '<div class="group-rule"></div><div class="grid">'
+        + items.map(e =>
+            '<div class="card" data-full="'+base+e.f+'.png" data-code="'+e.code+'">'
+            + '<div class="imgwrap"><img loading="lazy" src="'+base+e.f+'.png" alt="Sismograma de '+e.code+'"></div>'
+            + '<div class="label"><span class="code">'+e.code+'</span>'
+            + '<span class="badge" style="background:'+gr.color+'"></span></div></div>'
+          ).join("")
+        + '</div>';
+      cont.appendChild(sec);
+    });
+  }
+
+  // Lightbox
+  const lb=document.getElementById("lb"),lbImg=document.getElementById("lbImg"),lbCap=document.getElementById("lbCap");
+  document.addEventListener("click",e=>{
+    const t=e.target.closest("[data-full]");
+    if(t){lbImg.src=t.dataset.full;lbImg.alt="Sismograma de "+t.dataset.code;
+      lbCap.innerHTML=t.dataset.code+'<span class="hint">clic para cerrar</span>';
+      lb.classList.add("open");}
+  });
+  function closeLb(){lb.classList.remove("open");lbImg.src="";}
+  lb.addEventListener("click",closeLb);
+  document.getElementById("lbClose").addEventListener("click",closeLb);
+  document.addEventListener("keydown",e=>{if(e.key==="Escape")closeLb();});
+
+  // Carga el datos.js del enjambre indicado
+  if(!carpeta){
+    document.getElementById("err").style.display="block";
+    document.getElementById("err").textContent="No se ha indicado ningún enjambre. Vuelve al catálogo.";
+    document.getElementById("titulo").textContent="Error";
+  } else {
+    const s=document.createElement("script");
+    s.src="enjambres/"+carpeta+"/datos.js";
+    s.onload=()=>{ if(window.DATOS_ENJAMBRE) render(window.DATOS_ENJAMBRE); };
+    s.onerror=()=>{
+      document.getElementById("err").style.display="block";
+      document.getElementById("err").textContent="No se pudo cargar el enjambre '"+carpeta+"'. Revisa que exista enjambres/"+carpeta+"/datos.js";
+      document.getElementById("titulo").textContent="Error";
+    };
+    document.head.appendChild(s);
+  }
+</script>
+
+</body>
+</html>
