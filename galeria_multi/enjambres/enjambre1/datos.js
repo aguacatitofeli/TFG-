@@ -23,7 +23,7 @@ window.DATOS_ENJAMBRE = {
     desc: "Estación patrón (canal HHZ). Ruido de fondo bajo, registro continuo y sin saturación. El resto se clasifica por cercanía a este comportamiento."
   },
 
-  estaciones = [
+  estaciones : [
     {f:"01_ES_CNOR_",    code:"ES.CNOR",     g:"ok"},
     {f:"02_ES_CBOL_",    code:"ES.CBOL",     g:"no"},
     {f:"03_ES_CFOR_",    code:"ES.CFOR",     g:"ok"},
