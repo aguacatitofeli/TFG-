@@ -13,8 +13,8 @@
 // =============================================================================
 
 window.DATOS_ENJAMBRE = {
-  eyebrow: "Enjambre 17 de junio 2022",
-  titulo: "Enjambre 17 de junio 2022",
+  eyebrow: "Enjambre 12 de julio 2022",
+  titulo: "Enjambre 12 de julio 2022",
   desc: "Comparación visual de las estaciones frente a la referencia ES.CCAN (canal HHZ).",
 
   referencia: {
