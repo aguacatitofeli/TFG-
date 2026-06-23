@@ -1,5 +1,5 @@
 # Galería de varios enjambres — cómo funciona y cómo añadir más
-
+#
 Tienes una web con una PORTADA que lista los enjambres, y una página de galería
 por cada uno. Pero la página de galería es UNA SOLA (enjambre.html) que vale
 para todos: cada enjambre solo aporta sus datos y sus imágenes.
