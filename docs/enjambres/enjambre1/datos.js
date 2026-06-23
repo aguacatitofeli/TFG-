@@ -1,6 +1,12 @@
 // =============================================================================
-//  DATOS DEL ENJAMBRE 2  (estaciones distintas al enjambre 1)
-//  Ver explicacion completa en enjambre1/datos.js
+//  DATOS DEL ENJAMBRE 1 
+//
+//  - titulo / desc / eyebrow:  textos que se muestran arriba.
+//  - referencia:  la estacion patron (va destacada arriba). f = nombre del PNG
+//                 sin extension, code = como se muestra.
+//  - estaciones:  el resto. g = grupo:  "ok" seleccionada | "mid" condicional | "no" descartada
+//
+//  Los PNG van en la subcarpeta  sismogramas/  de este mismo enjambre.
 // =============================================================================
 
 window.DATOS_ENJAMBRE = {

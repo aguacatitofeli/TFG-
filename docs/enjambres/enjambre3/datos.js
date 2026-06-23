@@ -1,8 +1,5 @@
 // =============================================================================
-//  DATOS DEL ENJAMBRE 1
-//
-//  Este es el UNICO archivo que editas para este enjambre.
-//  Copia esta carpeta entera para crear un enjambre nuevo y cambia lo de aqui.
+//  DATOS DEL ENJAMBRE 3
 //
 //  - titulo / desc / eyebrow:  textos que se muestran arriba.
 //  - referencia:  la estacion patron (va destacada arriba). f = nombre del PNG
