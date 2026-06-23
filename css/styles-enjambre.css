@@ -1,0 +1,335 @@
+/* ==========================================================================
+   1. VARIABLES Y CONFIGURACIÓN GLOBAL
+   ========================================================================== */
+:root {
+  --bg: #0e1116;
+  --panel: #161b22;
+  --line: #2a3340;
+  --ink: #e6edf3;
+  --ink-dim: #8b949e;
+  --ref: #58a6ff;
+  --ok: #3fb950;
+  --mid: #d29922;
+  --no: #f85149;
+  --mono: 'SFMono-Regular', ui-monospace, 'Cascadia Code', 'Menlo', monospace;
+  --sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--sans);
+  line-height: 1.6;
+  padding: 0 0 80px;
+}
+
+/* ==========================================================================
+   2. BOTÓN VOLVER Y CABECERA
+   ========================================================================== */
+.back {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px 32px 0;
+  font-family: var(--mono);
+  font-size: 13px;
+}
+
+.back a {
+  color: var(--ink-dim);
+  text-decoration: none;
+}
+
+.back a:hover {
+  color: var(--ref);
+}
+
+header {
+  border-bottom: 1px solid var(--line);
+  padding: 20px 32px 36px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.eyebrow {
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--ink-dim);
+  margin-bottom: 14px;
+}
+
+header h1 {
+  font-size: 30px;
+  font-weight: 600;
+  letter-spacing: -0.5px;
+  margin-bottom: 12px;
+}
+
+header p {
+  color: var(--ink-dim);
+  max-width: 680px;
+  font-size: 15px;
+}
+
+/* Leyenda de colores */
+.legend {
+  display: flex;
+  gap: 22px;
+  flex-wrap: wrap;
+  margin-top: 24px;
+  font-family: var(--mono);
+  font-size: 12px;
+}
+
+.legend span {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  color: var(--ink-dim);
+}
+
+.dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 2px;
+  display: inline-block;
+}
+
+/* ==========================================================================
+   3. BLOQUE DE ESTACIÓN DE REFERENCIA
+   ========================================================================== */
+main {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+.reference {
+  margin: 40px 0;
+  border: 1px solid var(--ref);
+  border-radius: 12px;
+  background: linear-gradient(180deg, rgba(88, 166, 255, 0.06), transparent);
+  padding: 24px;
+  display: grid;
+  grid-template-columns: 340px 1fr;
+  gap: 28px;
+  align-items: center;
+}
+
+.reference .thumb {
+  cursor: zoom-in;
+}
+
+.reference img {
+  width: 100%;
+  border-radius: 8px;
+  display: block;
+  background: #fff;
+  border: 1px solid var(--line);
+}
+
+.reference .meta .tag {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--ref);
+  border: 1px solid var(--ref);
+  border-radius: 4px;
+  padding: 3px 9px;
+  display: inline-block;
+  margin-bottom: 12px;
+}
+
+.reference .meta h2 {
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.reference .meta p {
+  color: var(--ink-dim);
+  font-size: 14px;
+}
+
+/* ==========================================================================
+   4. SECCIONES DE GRUPOS Y TARJETAS (CARDS)
+   ========================================================================== */
+.group {
+  margin: 44px 0 12px;
+}
+
+.group-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 6px;
+}
+
+.group-head .gdot {
+  width: 11px;
+  height: 11px;
+  border-radius: 3px;
+}
+
+.group-head h3 {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.group-head .count {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--ink-dim);
+  margin-left: auto;
+}
+
+.group-rule {
+  height: 1px;
+  background: var(--line);
+  margin-bottom: 22px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 18px;
+}
+
+.card {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  overflow: hidden;
+  cursor: zoom-in;
+  transition: border-color 0.15s, transform 0.15s;
+}
+
+.card:hover {
+  border-color: var(--ink-dim);
+  transform: translateY(-2px);
+}
+
+.card .imgwrap {
+  background: #fff;
+  line-height: 0;
+}
+
+.card img {
+  width: 100%;
+  display: block;
+}
+
+.card .label {
+  padding: 10px 14px;
+  font-family: var(--mono);
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.card .label .code {
+  color: var(--ink);
+}
+
+.card .label .badge {
+  width: 8px;
+  height: 8px;
+  border-radius: 2px;
+}
+
+/* ==========================================================================
+   5. VISUALIZADOR DE IMÁGENES (LIGHTBOX)
+   ========================================================================== */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(5, 7, 10, 0.94);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  padding: 40px;
+  cursor: zoom-out;
+}
+
+.lightbox.open {
+  display: flex;
+}
+
+.lightbox figure {
+  max-width: 1100px;
+  width: 100%;
+  text-align: center;
+}
+
+.lightbox img {
+  max-width: 100%;
+  max-height: 78vh;
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.6);
+}
+
+.lightbox figcaption {
+  font-family: var(--mono);
+  font-size: 14px;
+  color: var(--ink);
+  margin-top: 18px;
+}
+
+.lightbox .hint {
+  display: block;
+  font-size: 12px;
+  color: var(--ink-dim);
+  margin-top: 6px;
+}
+
+.lightbox .close {
+  position: absolute;
+  top: 24px;
+  right: 30px;
+  font-size: 30px;
+  color: var(--ink-dim);
+  background: none;
+  border: none;
+  cursor: pointer;
+  line-height: 1;
+}
+
+.lightbox .close:hover {
+  color: var(--ink);
+}
+
+/* Mensaje de Error */
+.err {
+  max-width: 1200px;
+  margin: 60px auto;
+  padding: 0 32px;
+  color: var(--no);
+  font-family: var(--mono);
+  font-size: 14px;
+}
+
+/* ==========================================================================
+   6. DISEÑO RESPONSIVO (MEDIA QUERIES)
+   ========================================================================== */
+@media (max-width: 680px) {
+  .reference {
+    grid-template-columns: 1fr;
+  }
+  header {
+    padding: 16px 20px 28px;
+  }
+  main {
+    padding: 0 20px;
+  }
+}

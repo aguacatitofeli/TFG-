@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Galería de enjambre · TFG</title>
+  <link rel="stylesheet" href="css/styles-enjambre.css">
+  <script defer src="js/enjambre.js"></script>
+</head>
+<body>
+
+  <div class="back"><a href="index.html">&larr; Volver al catálogo</a></div>
+
+  <header>
+    <div class="eyebrow" id="eyebrow">Enjambre</div>
+    <h1 id="titulo">Cargando…</h1>
+    <p id="desc"></p>
+    <div class="legend">
+      <span><i class="dot" style="background:var(--ref)"></i> Referencia</span>
+      <span><i class="dot" style="background:var(--ok)"></i> Seleccionada</span>
+      <span><i class="dot" style="background:var(--mid)"></i> Condicional</span>
+      <span><i class="dot" style="background:var(--no)"></i> Descartada</span>
+    </div>
+  </header>
+
+  <main>
+    <section class="reference" id="refBox" style="display:none">
+      <div class="thumb" id="refThumb">
+        <img id="refImg" src="" alt="">
+      </div>
+      <div class="meta">
+        <span class="tag">Estación de referencia</span>
+        <h2 id="refCode"></h2>
+        <p id="refDesc"></p>
+      </div>
+    </section>
+    <div id="groups"></div>
+  </main>
+
+  <div class="err" id="err" style="display:none"></div>
+
+  <div class="lightbox" id="lb">
+    <button class="close" id="lbClose" aria-label="Cerrar">&times;</button>
+    <figure><img id="lbImg" src="" alt=""><figcaption id="lbCap"></figcaption></figure>
+  </div>
+
+</body>
+</html>
